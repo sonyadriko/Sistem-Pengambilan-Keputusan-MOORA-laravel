@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HitungController;
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,10 @@ use App\Http\Controllers\HitungController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::redirect('/', '/login');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -46,11 +47,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::resource('hitung', 'HitungController');
     Route::post('/karyawan/submit', [HitungController::class, 'submit'])->name('karyawan.submit');
+    Route::post('/history/detail', [HistoryController::class, 'detail'])->name('history.detail');
     // Route::post('/save-ranking', [HitungController::class, 'saveRanking'])->name('saveRanking');
     Route::post('/save-ranking', [HitungController::class, 'saveRanking'])->name('save.ranking');
 	Route::resource('perhitungan', 'PerhitunganController');
 	Route::resource('user', 'UserController');
     Route::resource('history', 'HistoryController');
+    Route::get('/history/{id}', [HistoryController::class, 'detail'])->name('history.detail');
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);

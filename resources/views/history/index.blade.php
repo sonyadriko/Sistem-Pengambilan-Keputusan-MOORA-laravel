@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     @include('layouts.headers.cards')
     <div class="container-fluid mt--7">
@@ -9,43 +8,33 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Data Detail Karyawan</h3>
-                            </div>
-                            <div class="col-4 text-right">
-                                <a href="{{ URL::to('/') }}/detailkriteria/create/{{ $id_kriteria }}"
-                                    class="btn btn-sm btn-primary">Add Kriteria Penilaian</a>
+                                <h3 class="mb-0">Data History</h3>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-12">
                     </div>
 
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Karyawan</th>
-                                    <th scope="col">Nilai</th>
-                                    <!-- <th scope="col"></th> -->
+                                    <th scope="col">#</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($detailkriteria as $key => $row)
+                                @foreach ($history as $key => $row)
                                     <tr>
-                                        <td>{{ $row->name }}</td>
-                                        <td>{{ $row->nama_karyawan }}</td>
-                                        <td>{{ $row->nilai }}</td>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $row->created_at }}</td>
+                                        <td>
+                                            <a href="{{ route('history.detail', $row->id) }}"
+                                                class="btn btn-info">Detail</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <div class="card-footer py-4">
-                        <nav class="d-flex justify-content-end" aria-label="...">
-
-                        </nav>
                     </div>
                 </div>
             </div>

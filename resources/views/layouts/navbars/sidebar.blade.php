@@ -151,8 +151,13 @@
                     </li>
                 @elseif(auth()->user()->type_user == 2)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ URL::to('/') }}/karyawanuser">
-                            <i class="ni ni-key-25 text-info"></i> {{ __('Detail karyawan') }}
+                        <a class="nav-link" href="{{ URL::to('/') }}/karyawan">
+                            <i class="ni ni-single-02 text-blue"></i> {{ __('Data Karyawan') }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::to('/') }}/detailkriteria">
+                            <i class="ni ni-collection text-warning"></i> {{ __('Klasifikasi') }}
                         </a>
                     </li>
                     <!-- <li class="nav-item">

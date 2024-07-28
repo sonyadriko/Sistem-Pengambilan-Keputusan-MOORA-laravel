@@ -1,4 +1,7 @@
-<@extends('layouts.app') @section('content') @include('layouts.headers.cards') <div class="container-fluid mt--7">
+@extends('layouts.app')
+@section('content')
+    @include('layouts.headers.cards')
+    <div class="container-fluid mt--7">
         <div class="row">
             <div class="col">
                 <div class="card shadow">
@@ -13,11 +16,10 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
-                    </div>
+                    <div class="col-12"></div>
 
                     <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table class="table align-items-center table-flush" id="karyawanTable">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Name</th>
@@ -35,9 +37,7 @@
                                         <td>
                                             <a href="mailto:{{ $row->email }}">{{ $row->email }}</a>
                                         </td>
-                                        <td>
-                                            {{ $row->telpon }}
-                                        </td>
+                                        <td>{{ $row->telpon }}</td>
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
@@ -65,9 +65,7 @@
                         </table>
                     </div>
                     <div class="card-footer py-4">
-                        <nav class="d-flex justify-content-end" aria-label="...">
-
-                        </nav>
+                        <nav class="d-flex justify-content-end" aria-label="..."></nav>
                     </div>
                 </div>
             </div>
@@ -75,10 +73,19 @@
 
         <footer class="footer">
             @include('layouts.footers.auth')
-            </div>
-        @endsection
+        </footer>
+    </div>
+@endsection
 
-        @push('js')
-            <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
-            <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
-        @endpush
+@push('js')
+    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('#karyawanTable').DataTable();
+        });
+    </script> --}}
+@endpush

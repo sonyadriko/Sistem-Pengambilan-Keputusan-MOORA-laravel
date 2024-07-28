@@ -2,109 +2,54 @@
 
 @section('content')
     @include('layouts.headers.cards')
-    
-    <div class="container-fluid mt--9">
+
+    <div class="container-fluid mt--7">
         <div class="row">
-            <div class="col-xl-8 ">
-                <div class="card bg-gradient-default shadow">
-                    <div class="card-header bg-transparent">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-                                <h2 class="text-white mb-0">Data Potensi Air Tanah</h2>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <!-- Chart -->
-                        <div class="chart">
-                            <!-- Chart wrapper -->
-                            <iframe width="750" height="350" frameborder="0" scrolling="no" allowfullscreen src="https://arcg.is/1LGu190"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4">
+            <div class="col">
                 <div class="card shadow">
-                    <div class="card-header bg-transparent">
+                    <div class="card-header border-0">
                         <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="text-uppercase text-muted ls-1 mb-1">Pemilihan Perusahaan Pengeboran</h6>
-                                <ul class="nav nav-pills nav-fill flex-column flex-sm-row" id="tabs-text" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-text-1-tab" data-toggle="tab" href="#tabs-text-1" role="tab" aria-controls="tabs-text-1" aria-selected="true">Main</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link mb-sm-3 mb-md-0" id="tabs-text-2-tab" data-toggle="tab" href="#tabs-text-2" role="tab" aria-controls="tabs-text-2" aria-selected="false">Potensi</a>
-                                    </li>
-                                </ul>
+                            <div class="col-8">
+                                <h3 class="mb-0">RRI Surabaya</h3>
                             </div>
                         </div>
                     </div>
+
                     <div class="card-body">
-                        <!-- Chart -->
-                        <div class="chart">
-                            <!-- <div class="row">
-                                <div class="col-12 col-md-12 col-lg-12">
-                                    <div class="card"> -->
-                                        
-                                        <div class="card-body">
-                                        
-                                            <form action="{{URL::to('/')}}/perusahaanuser" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="tab-content">
-                                                <div id="tabs-text-1" class="tab-pane fade show active">
-                                                    <!-- <div class="form-group">
-                                                        <input type="text" name="nama" placeholder="Masukan Nama Anda" class="form-control" required>
-                                                    </div>-->
-                                                    <div class="form-group"> 
-                                                        <input type="text" name="name" placeholder="Nama Perusahaan" class="form-control" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="text" name="alamat" placeholder="Alamat Perusahaan" class="form-control" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="email" name="email" placeholder="Email Perusahaan" class="form-control" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="text" name="telpon" placeholder="No. Telpon" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div id="tabs-text-2" class="tab-pane fade">
-                                                    <div class="form-group">
-                                                        <label>Potensi Debit Air Tanah</label>
-                                                        <select class="form-control" id="potensi" name="potensi">
-                                                            <option value="Langka">Langka</option>
-                                                            <option value="<5 Lt/Dtk"> <5 Lt/Dtk </option>
-                                                            <option value="5-10 Lt/Dtk"> 5-10 Lt/Dtk </option>
-                                                            <option value=">10 Lt/Dtk"> >10 Lt/Dtk </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Kebutuhan Pemakaian Air Tanah</label>
-                                                        <select class="form-control" id="kebutuhan" name="kebutuhan">
-                                                            <option value="Kebutuhan Operasional">Kebutuhan Operasional</option>
-                                                            <option value="Kebutuhan Produksi">Kebutuhan Produksi</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Add</button>
-                                                </div>
-                                            </div>
-                                            </form>
-                                        </div>
-                                    <!-- </div>
-                                </div>
-                            </div> -->
-                        </div>
+                        <h4>Informasi Pengangkatan</h4>
+                        <p>
+                            RRI Surabaya baru-baru ini mengumumkan pengangkatan beberapa pegawai baru dalam upaya untuk
+                            meningkatkan kinerja dan pelayanan. Pengangkatan ini dilakukan dengan seleksi ketat untuk
+                            memastikan bahwa setiap individu yang dipilih memiliki kompetensi dan dedikasi yang tinggi.
+                        </p>
+
+                        <h4>Total Pegawai</h4>
+                        <p>
+                            Hingga saat ini, RRI Surabaya memiliki total pegawai sebanyak 150 orang. Jumlah ini mencakup
+                            berbagai divisi yang berperan penting dalam operasional stasiun radio, termasuk produksi,
+                            teknik, administrasi, dan layanan publik.
+                        </p>
+
+                        <h4>Profil Perusahaan</h4>
+                        <p>
+                            RRI Surabaya adalah salah satu stasiun radio milik pemerintah Indonesia yang berlokasi di kota
+                            Surabaya. Didirikan pada tahun 1945, RRI Surabaya memiliki sejarah panjang dalam penyiaran
+                            berita dan program hiburan kepada masyarakat.
+                        </p>
+                        <p>
+                            Dengan visi untuk menjadi media terdepan dalam penyampaian informasi yang akurat dan terpercaya,
+                            RRI Surabaya terus berinovasi dalam setiap program yang disiarkan. Beberapa program unggulan
+                            mencakup berita lokal dan nasional, acara musik, program budaya, serta berbagai program edukasi.
+                        </p>
+                        <p>
+                            RRI Surabaya juga aktif dalam mengadakan acara-acara khusus dan siaran langsung yang melibatkan
+                            partisipasi masyarakat. Dengan demikian, RRI Surabaya tidak hanya menjadi sumber informasi,
+                            tetapi juga menjadi wadah interaksi dan hiburan bagi pendengarnya.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-        
 
         @include('layouts.footers.auth')
     </div>

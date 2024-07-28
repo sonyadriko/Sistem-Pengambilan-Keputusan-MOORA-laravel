@@ -9,9 +9,14 @@ class HitungController extends Controller
 {
     public function index()
     {
+        // $karyawan = DB::table('karyawan')->get();
+        // // dd($karyawan);
+        // return view('hitung.index',compact('karyawan'));
         $karyawan = DB::table('karyawan')->get();
-        // dd($karyawan);
-        return view('hitung.index',compact('karyawan'));
+        $totalBobot = DB::table('kriteria')->sum('bobot'); // Adjust this based on your actual table and column names
+        $isValidBobot = $totalBobot == 100;
+
+        return view('hitung.index', compact('karyawan', 'isValidBobot'));
     }
     public function submit(Request $request)
     {

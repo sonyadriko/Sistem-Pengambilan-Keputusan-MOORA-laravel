@@ -12,8 +12,8 @@
                                 <h3 class="mb-0">Data Detail Perusahaan</h3>
                             </div>
                             <!-- <div class="col-4 text-right">
-                                                                            <a href="{{ URL::to('/') }}/klasifikasi/create" class="btn btn-sm btn-primary">Add klasifikasi</a>
-                                                                        </div> -->
+                                                                                <a href="{{ URL::to('/') }}/klasifikasi/create" class="btn btn-sm btn-primary">Add klasifikasi</a>
+                                                                            </div> -->
                         </div>
                     </div>
 
@@ -220,10 +220,6 @@
                                         <tr>
                                             <td>5</td>
                                             <td>70% atau lebih</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2, 4, 6, 8</td>
-                                            <td>Nilai-nilai antara dua nilai pertimbangan yang berdekatan</td>
                                         </tr>
                                     </tbody>
                                 </table>
