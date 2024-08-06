@@ -118,11 +118,11 @@
                             <i class="ni ni-circle-08 text-orange"></i> {{ __('Kriteria') }}
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ URL::to('/') }}/detailkriteria">
                             <i class="ni ni-collection text-warning"></i> {{ __('Klasifikasi') }}
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ URL::to('/') }}/hitung">
                             <i class="ni ni-key-25 text-info"></i> {{ __('Hasil Ranking') }}

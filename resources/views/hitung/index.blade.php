@@ -26,7 +26,7 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Alamat</th>
+                                            {{-- <th scope="col">Alamat</th> --}}
                                             {{-- <th scope="col">Email</th>
                                             <th scope="col">Phone</th> --}}
                                             <th scope="col">Checklist</th>
@@ -36,13 +36,13 @@
                                         @foreach ($karyawan as $key => $row)
                                             <tr>
                                                 <td>{{ $row->name }}</td>
-                                                <td>{{ $row->alamat }}</td>
+                                                {{-- <td>{{ $row->alamat }}</td> --}}
                                                 {{-- <td>
                                                     <a href="mailto:{{ $row->email }}">{{ $row->email }}</a>
                                                 </td>
                                                 <td>{{ $row->telpon }}</td> --}}
                                                 <td>
-                                                    <div class="custom-control custom-checkbox">
+                                                    <div class="custom-control custom-checkbox mb-2">
                                                         <input class="custom-control-input karyawan-checkbox"
                                                             id="customCheck{{ $key }}" type="checkbox"
                                                             value="{{ $row->id }}">

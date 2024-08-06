@@ -26,7 +26,7 @@
                                     <th scope="col">Alamat</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,26 +38,15 @@
                                             <a href="mailto:{{ $row->email }}">{{ $row->email }}</a>
                                         </td>
                                         <td>{{ $row->telpon }}</td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="karyawan/{{ $row->id }}">Edit</a>
-                                                    <a class="dropdown-item"
-                                                        href="karyawan/detail/{{ $row->id }}">Detail</a>
-                                                    <form method="POST" action="/karyawan/{{ $row->id }}">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
-
-                                                        <div class="form-group">
-                                                            <input type="submit" class="dropdown-item" value="Delete">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                        <td>
+                                            <a href="karyawan/{{ $row->id }}" class="btn btn-warning">Edit</a>
+                                            <a href="karyawan/detail/{{ $row->id }}" class="btn btn-info">Detail</a>
+                                            <form method="POST" action="/karyawan/{{ $row->id }}"
+                                                style="display:inline-block;">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <input type="submit" class="btn btn-danger" value="Delete">
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

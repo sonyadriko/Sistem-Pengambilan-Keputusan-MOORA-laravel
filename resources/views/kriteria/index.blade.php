@@ -30,8 +30,8 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Bobot (%)</th>
                                     <th scope="col">Jenis</th>
-                                    <th scope="col">Creation Date</th>
-                                    <th scope="col"></th>
+                                    {{-- <th scope="col">Creation Date</th> --}}
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="kriteria-body">
@@ -40,24 +40,19 @@
                                         <td>{{ $row->name }}</td>
                                         <td class="bobot">{{ $row->bobot }}</td>
                                         <td>{{ $row->jenis }}</td>
-                                        <td>{{ $row->created_at }}</td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="kriteria/{{ $row->id }}">Edit</a>
-                                                    {{-- <form method="POST" action="/kriteria/{{ $row->id }}">
+                                        {{-- <td>{{ $row->created_at }}</td> --}}
+                                        <td>
+                                            {{-- <a class="btn btn-warning" href="kriteria/{{ $row->id }}">Edit</a> --}}
+                                            <a href="{{ URL::to('/') }}/detailkriteria/detail/{{ $row->id }}"
+                                                class="btn btn-info">Detail</a>
+                                            {{-- <form method="POST" action="/kriteria/{{ $row->id }}">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
                                                         <div class="form-group">
                                                             <input type="submit" class="dropdown-item" value="Delete">
                                                         </div>
                                                     </form> --}}
-                                                </div>
-                                            </div>
+
                                         </td>
                                     </tr>
                                 @endforeach
