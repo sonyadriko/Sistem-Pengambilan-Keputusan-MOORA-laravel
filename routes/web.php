@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HitungController;
+use App\Http\Controllers\KaryawanController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,7 +47,16 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('karyawan/detail/{id}', 'KaryawanController@edit');
 	Route::get('detailkriteria/edit/{id}', 'DetailkriteriaController@edit');
 
-	Route::resource('hitung', 'HitungController');
+    Route::post('/karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');
+    Route::get('/karyawan/criteria_form/{employee_id}', [KaryawanController::class, 'criteriaForm'])->name('karyawan.criteria_form');
+    Route::post('/karyawan/store_criteria', [KaryawanController::class, 'storeCriteria'])->name('karyawan.store_criteria');
+    Route::get('/karyawan/detail/{id}', [KaryawanController::class, 'show'])->name('karyawan.show');
+    // web.php
+    Route::get('/karyawan/add_criteria/{employee_id}', [KaryawanController::class, 'addCriteria'])->name('karyawan.add_criteria');
+    Route::post('/karyawan/store_criteria', [KaryawanController::class, 'storeCriteria'])->name('karyawan.store_criteria');
+
+
+    Route::resource('hitung', 'HitungController');
     Route::post('/karyawan/submit', [HitungController::class, 'submit'])->name('karyawan.submit');
     Route::post('/history/detail', [HistoryController::class, 'detail'])->name('history.detail');
     // Route::post('/save-ranking', [HitungController::class, 'saveRanking'])->name('saveRanking');

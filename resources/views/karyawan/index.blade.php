@@ -40,7 +40,9 @@
                                         <td>{{ $row->telpon }}</td>
                                         <td>
                                             <a href="karyawan/{{ $row->id }}" class="btn btn-warning">Edit</a>
-                                            <a href="karyawan/detail/{{ $row->id }}" class="btn btn-info">Detail</a>
+                                            {{-- <a href="karyawan/detail/{{ $row->id }}" class="btn btn-info">Detail</a> --}}
+                                            <a href="{{ route('karyawan.show', $row->id) }}" class="btn btn-info">Detail</a>
+
                                             <form method="POST" action="/karyawan/{{ $row->id }}"
                                                 style="display:inline-block;">
                                                 {{ csrf_field() }}

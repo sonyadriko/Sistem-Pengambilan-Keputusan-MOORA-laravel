@@ -12,8 +12,8 @@
                                 <h3 class="mb-0">Data karyawan</h3>
                             </div>
                             <!-- <div class="col-4 text-right">
-                                    <a href="{{ URL::to('/') }}/karyawan/create" class="btn btn-sm btn-primary">Add karyawan</a>
-                                </div> -->
+                                        <a href="{{ URL::to('/') }}/karyawan/create" class="btn btn-sm btn-primary">Add karyawan</a>
+                                    </div> -->
                         </div>
                     </div>
 
@@ -73,8 +73,8 @@
                                                     </div>
 
                                                     <!-- <div class="form-group">
-                                                    <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Changes</button>
-                                                </div> -->
+                                                        <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Changes</button>
+                                                    </div> -->
                                                 </div>
                                             </form>
                                         @endforeach
