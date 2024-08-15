@@ -27,11 +27,11 @@ Route::post('/resetpassword', 'UserController@forgotPasswordEmail');
 Route::get('send-mail', function () {
 
 	$details = [
-		'title' => 'Mail from ItSolutionStuff.com',
+		'title' => 'Mail from argon.com',
 		'body' => 'This is for testing email using smtp'
 	];
 
-	Mail::to('chandra.ramadhan100391@gmail.com')->send(new \App\Mail\ForgotPassword($details));
+	Mail::to('adminargon@gmail.com')->send(new \App\Mail\ForgotPassword($details));
 
 	dd("Email is Sent.");
 });
@@ -51,13 +51,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/karyawan/criteria_form/{employee_id}', [KaryawanController::class, 'criteriaForm'])->name('karyawan.criteria_form');
     Route::post('/karyawan/store_criteria', [KaryawanController::class, 'storeCriteria'])->name('karyawan.store_criteria');
     Route::get('/karyawan/detail/{id}', [KaryawanController::class, 'show'])->name('karyawan.show');
+    Route::get('/karyawan/{id}/edit', [App\Http\Controllers\KaryawanController::class, 'edit'])->name('karyawan.edit');
+    Route::post('/karyawan/{id}', [App\Http\Controllers\KaryawanController::class, 'update'])->name('karyawan.update');
+    Route::get('/karyawan/{id}/edit_criteria', [KaryawanController::class, 'editCriteria'])->name('karyawan.edit_criteria');
+    Route::put('/karyawan/{id}/update_criteria', [KaryawanController::class, 'updateCriteria'])->name('karyawan.update_criteria');
+
     // web.php
     Route::get('/karyawan/add_criteria/{employee_id}', [KaryawanController::class, 'addCriteria'])->name('karyawan.add_criteria');
     Route::post('/karyawan/store_criteria', [KaryawanController::class, 'storeCriteria'])->name('karyawan.store_criteria');
 
 
     Route::resource('hitung', 'HitungController');
-    Route::post('/karyawan/submit', [HitungController::class, 'submit'])->name('karyawan.submit');
+    Route::post('/hitung/submit', [HitungController::class, 'submit'])->name('hitung.submit');
     Route::post('/history/detail', [HistoryController::class, 'detail'])->name('history.detail');
     // Route::post('/save-ranking', [HitungController::class, 'saveRanking'])->name('saveRanking');
     Route::post('/save-ranking', [HitungController::class, 'saveRanking'])->name('save.ranking');

@@ -16,19 +16,22 @@
                                 <div class="col-8">
                                     <h3 class="mb-0">Data Karyawan</h3>
                                 </div>
+                                <div class="col-4 text-right">
+                                    <button id="selectAll" class="btn btn-sm btn-primary">Select All</button>
+                                </div>
                             </div>
                         </div>
 
                         <div class="table-responsive">
-                            <form id="karyawanForm" method="POST" action="{{ route('karyawan.submit') }}">
+                            <form id="karyawanForm" method="POST" action="{{ route('hitung.submit') }}">
                                 @csrf
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">Name</th>
-                                            {{-- <th scope="col">Alamat</th> --}}
-                                            {{-- <th scope="col">Email</th>
-                                            <th scope="col">Phone</th> --}}
+                                            <th scope="col">Alamat</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Phone</th>
                                             <th scope="col">Checklist</th>
                                         </tr>
                                     </thead>
@@ -36,11 +39,11 @@
                                         @foreach ($karyawan as $key => $row)
                                             <tr>
                                                 <td>{{ $row->name }}</td>
-                                                {{-- <td>{{ $row->alamat }}</td> --}}
-                                                {{-- <td>
+                                                <td>{{ $row->alamat }}</td>
+                                                <td>
                                                     <a href="mailto:{{ $row->email }}">{{ $row->email }}</a>
                                                 </td>
-                                                <td>{{ $row->telpon }}</td> --}}
+                                                <td>{{ $row->telpon }}</td>
                                                 <td>
                                                     <div class="custom-control custom-checkbox mb-2">
                                                         <input class="custom-control-input karyawan-checkbox"
@@ -89,6 +92,17 @@
             } else {
                 document.getElementById('selected_karyawan').value = selected.join(',');
             }
+        });
+
+        document.getElementById('selectAll').addEventListener('click', function() {
+            let checkboxes = document.querySelectorAll('.karyawan-checkbox');
+            let allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = !allChecked;
+            });
+
+            document.getElementById('selectAll').innerText = allChecked ? 'Select All' : 'Deselect All';
         });
     </script>
 @endpush

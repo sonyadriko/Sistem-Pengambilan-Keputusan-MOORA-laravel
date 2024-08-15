@@ -39,8 +39,11 @@
                                         </td>
                                         <td>{{ $row->telpon }}</td>
                                         <td>
-                                            <a href="karyawan/{{ $row->id }}" class="btn btn-warning">Edit</a>
-                                            {{-- <a href="karyawan/detail/{{ $row->id }}" class="btn btn-info">Detail</a> --}}
+                                            <a href="{{ route('karyawan.edit', $row->id) }}"
+                                                class="btn btn-warning">Edit</a>
+                                            <a href="{{ route('karyawan.add_criteria', $row->id) }}"
+                                                class="btn btn-primary">Add
+                                                Kriteria</a>
                                             <a href="{{ route('karyawan.show', $row->id) }}" class="btn btn-info">Detail</a>
 
                                             <form method="POST" action="/karyawan/{{ $row->id }}"
@@ -74,9 +77,4 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    {{-- <script>
-        $(document).ready(function() {
-            $('#karyawanTable').DataTable();
-        });
-    </script> --}}
 @endpush

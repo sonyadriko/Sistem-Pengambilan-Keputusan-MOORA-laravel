@@ -9,9 +9,6 @@ class HitungController extends Controller
 {
     public function index()
     {
-        // $karyawan = DB::table('karyawan')->get();
-        // // dd($karyawan);
-        // return view('hitung.index',compact('karyawan'));
         $karyawan = DB::table('karyawan')->get();
         $totalBobot = DB::table('kriteria')->sum('bobot'); // Adjust this based on your actual table and column names
         $isValidBobot = $totalBobot == 100;
@@ -22,6 +19,8 @@ class HitungController extends Controller
     {
         // Ambil ID karyawan yang dipilih dari input hidden
         $selectedKaryawanIds = explode(',', $request->input('selected_karyawan'));
+
+        \Log::info('Data received: ', $request->all());
 
         // Lakukan query menggunakan Query Builder untuk mengambil karyawan dan nilai kriteria mereka
         $selectedKaryawan = DB::table('karyawan')
@@ -37,13 +36,13 @@ class HitungController extends Controller
             ->groupBy('karyawan.id', 'karyawan.name', 'karyawan.alamat', 'karyawan.email', 'karyawan.telpon')
             ->get();
 
-               // Hitung nilai K
+        // Hitung nilai K
         $k1 = sqrt($selectedKaryawan->sum(function($row) { return pow($row->jenjang_pendidikan, 2); }));
         $k2 = sqrt($selectedKaryawan->sum(function($row) { return pow($row->pengalaman, 2); }));
         $k3 = sqrt($selectedKaryawan->sum(function($row) { return pow($row->absensi, 2); }));
         $k4 = sqrt($selectedKaryawan->sum(function($row) { return pow($row->loyalitas, 2); }));
         $k5 = sqrt($selectedKaryawan->sum(function($row) { return pow($row->wawancara, 2); }));
-        // Kembalikan view dengan data karyawan yang dipilih
+
         // Hitung normalisasi
         $normalisasi = [];
         foreach ($selectedKaryawan as $karyawan) {
@@ -98,6 +97,7 @@ class HitungController extends Controller
                 'total_optimasi' => $total_optimasi,
             ];
         }
+        \Log::info('Optimasi hasil: ', $optimasi);
 
         usort($optimasi, function($a, $b) {
             return $b['total_optimasi'] <=> $a['total_optimasi'];
@@ -113,7 +113,6 @@ class HitungController extends Controller
             'k4' => $k4,
             'k5' => $k5
         ]);
-        // return view('hitung.selected', ['karyawan' => $selectedKaryawan]);
     }
     // public function saveRanking(Request $request)
     // {

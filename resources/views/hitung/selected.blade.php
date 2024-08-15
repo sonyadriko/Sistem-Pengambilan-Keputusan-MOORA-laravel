@@ -6,8 +6,8 @@
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col">
-                <div class="card shadow">
-                    <div class="card-header border-0">
+                <div class="card shadow-sm border-light mb-4">
+                    <div class="card-header border-0 text-white">
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0">Selected Karyawan</h3>
@@ -15,8 +15,8 @@
                         </div>
                     </div>
 
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                    <div class="table-responsive p-3">
+                        <table class="table align-items-center table-flush" id="selectedKaryawanTable">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Name</th>
@@ -44,36 +44,19 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="row">
-            <div class="col-2">
-                <p>K1: {{ $k1 }}</p>
-            </div>
-            <div class="col-2">
-                <p>K2: {{ $k2 }}</p>
-            </div>
-            <div class="col-2">
-                <p>K3: {{ $k3 }}</p>
-            </div>
-            <div class="col-2">
-                <p>K4: {{ $k4 }}</p>
-            </div>
-            <div class="col-2">
-                <p>K5: {{ $k5 }}</p>
-            </div>
-        </div> --}}
-        <div class="row mt-5">
+
+        <div class="row">
             <div class="col">
-                <div class="card shadow">
-                    <div class="card-header border-0">
+                <div class="card shadow-sm border-light mb-4">
+                    <div class="card-header border-0 bg-secondary text-white">
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0">Normalisasi Matriks Keputusan</h3>
                             </div>
                         </div>
                     </div>
-
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                    <div class="table-responsive p-3">
+                        <table class="table align-items-center table-flush" id="normalisasiMatriksKeputusanTable">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">K1</th>
@@ -97,19 +80,19 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
+
+        <div class="row">
             <div class="col">
-                <div class="card shadow">
-                    <div class="card-header border-0">
+                <div class="card shadow-sm border-light mb-4">
+                    <div class="card-header border-0 text-white">
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0">Nilai Normalisasi</h3>
                             </div>
                         </div>
                     </div>
-
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                    <div class="table-responsive p-3">
+                        <table class="table align-items-center table-flush" id="nilaiNormalisasiTable">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Name</th>
@@ -138,19 +121,18 @@
             </div>
         </div>
 
-        <div class="row mt-5">
+        <div class="row">
             <div class="col">
-                <div class="card shadow">
-                    <div class="card-header border-0">
+                <div class="card shadow-sm border-light mb-4">
+                    <div class="card-header border-0 text-dark">
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0">Nilai Optimasi</h3>
                             </div>
                         </div>
                     </div>
-
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                    <div class="table-responsive p-3">
+                        <table class="table align-items-center table-flush" id="nilaiOptimasiTable">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Name</th>
@@ -183,19 +165,18 @@
             </div>
         </div>
 
-        <div class="row mt-5">
+        <div class="row">
             <div class="col">
-                <div class="card shadow">
-                    <div class="card-header border-0">
+                <div class="card shadow-sm border-light mb-4">
+                    <div class="card-header border-0 text-white">
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0">Hasil Optimasi dan Ranking</h3>
                             </div>
                         </div>
                     </div>
-
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                    <div class="table-responsive p-3">
+                        <table class="table align-items-center table-flush" id="hasilOptimasiRankingTable">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Name</th>
@@ -214,7 +195,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer py-4">
+                    <div class="card-footer py-4 ">
                         <nav class="d-flex justify-content-end" aria-label="...">
                             <form action="{{ route('save.ranking') }}" method="POST">
                                 @csrf
@@ -227,14 +208,69 @@
             </div>
         </div>
 
-
         <footer class="footer">
             @include('layouts.footers.auth')
         </footer>
     </div>
 @endsection
 
+@push('css')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+@endpush
+
 @push('js')
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#selectedKaryawanTable').DataTable({
+                "pagingType": "simple_numbers",
+                "language": {
+                    "paginate": {
+                        "previous": "&laquo;",
+                        "next": "&raquo;"
+                    }
+                }
+            });
+            $('#normalisasiMatriksKeputusanTable').DataTable({
+                "pagingType": "simple_numbers",
+                "language": {
+                    "paginate": {
+                        "previous": "&laquo;",
+                        "next": "&raquo;"
+                    }
+                }
+            });
+            $('#nilaiNormalisasiTable').DataTable({
+                "pagingType": "simple_numbers",
+                "language": {
+                    "paginate": {
+                        "previous": "&laquo;",
+                        "next": "&raquo;"
+                    }
+                }
+            });
+            $('#nilaiOptimasiTable').DataTable({
+                "pagingType": "simple_numbers",
+                "language": {
+                    "paginate": {
+                        "previous": "&laquo;",
+                        "next": "&raquo;"
+                    }
+                }
+            });
+            $('#hasilOptimasiRankingTable').DataTable({
+                "pagingType": "simple_numbers",
+                "language": {
+                    "paginate": {
+                        "previous": "&laquo;",
+                        "next": "&raquo;"
+                    }
+                }
+            });
+        });
+    </script>
 @endpush

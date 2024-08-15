@@ -70,33 +70,6 @@ class KaryawanController extends Controller
         return view('karyawan.create_kriteria', compact('karyawan','employee_id'));
     }
 
-    // public function storeCriteria(Request $request)
-    // {
-    //     try {
-    //         $validatedData = $request->validate([
-    //             'employee_id' => 'required|exists:karyawan,id',
-    //             'jenjang_pendidikan' => 'required|numeric',
-    //             'pengalaman' => 'required|numeric',
-    //             'absensi' => 'required|numeric',
-    //             'loyalitas' => 'required|numeric',
-    //             'wawancara' => 'required|numeric',
-    //         ]);
-
-    //         $criteriaData = [
-    //             ['id_kriteria' => 9, 'id_karyawan' => $validatedData['employee_id'], 'nilai' => $validatedData['jenjang_pendidikan']],
-    //             ['id_kriteria' => 10, 'id_karyawan' => $validatedData['employee_id'], 'nilai' => $validatedData['pengalaman']],
-    //             ['id_kriteria' => 11, 'id_karyawan' => $validatedData['employee_id'], 'nilai' => $validatedData['absensi']],
-    //             ['id_kriteria' => 12, 'id_karyawan' => $validatedData['employee_id'], 'nilai' => $validatedData['loyalitas']],
-    //             ['id_kriteria' => 13, 'id_karyawan' => $validatedData['employee_id'], 'nilai' => $validatedData['wawancara']],
-    //         ];
-
-    //         DB::table('detailkriteria')->insert($criteriaData);
-
-    //         return redirect()->route('karyawan.index')->with('success', 'Criteria added successfully');
-    //     } catch (Exception $e) {
-    //         return redirect()->route('karyawan.criteria_form', ['employee_id' => $request->employee_id])->with('status_fail', 'Failed to add criteria');
-    //     }
-    // }
 
     public function addCriteria($employee_id)
     {
@@ -144,13 +117,14 @@ class KaryawanController extends Controller
     public function show($id)
     {
         $employee = DB::table('karyawan')->where('id', $id)->first();
+        $karyawan = DB::table('karyawan')->where('id',$id)->first();
         $criteria = DB::table('detailkriteria')
             ->join('kriteria', 'detailkriteria.id_kriteria', '=', 'kriteria.id')
             ->where('detailkriteria.id_karyawan', $id)
             ->select('kriteria.name', 'detailkriteria.nilai')
             ->get();
 
-        return view('karyawan.show', compact('employee', 'criteria'));
+        return view('karyawan.show', compact('employee', 'criteria', 'karyawan'));
     }
 
     /**
@@ -161,8 +135,8 @@ class KaryawanController extends Controller
      */
     public function edit($id)
     {
-        $karyawan = DB::table('karyawan')->where('id',$id)->get();
-        return view('karyawan.detail',compact('karyawan'));
+        $karyawan = DB::table('karyawan')->where('id',$id)->first();
+        return view('karyawan.edit', compact('karyawan'));
     }
 
     /**
@@ -220,4 +194,47 @@ class KaryawanController extends Controller
             return redirect('/karyawan')->with('status_fail', 'falseinsert');
         }
     }
+    public function editCriteria($id)
+    {
+        $karyawan = DB::table('karyawan')->where('id',$id)->first();
+        $criteria = DB::table('detailkriteria')
+                      ->where('id_karyawan', $id)
+                      ->get()
+                      ->keyBy('id_kriteria');
+
+        return view('karyawan.edit_criteria', compact('karyawan', 'criteria'));
+    }
+
+
+    // Method for updating criteria
+    public function updateCriteria(Request $request, $id)
+    {
+        $request->validate([
+            'jenjang_pendidikan' => 'nullable|integer',
+            'pengalaman' => 'nullable|integer',
+            'absensi' => 'nullable|integer',
+            'loyalitas' => 'nullable|integer',
+            'wawancara' => 'nullable|integer',
+        ]);
+
+        $criteria = [
+            ['id_karyawan' => $id, 'id_kriteria' => 9, 'nilai' => $request->jenjang_pendidikan],
+            ['id_karyawan' => $id, 'id_kriteria' => 10, 'nilai' => $request->pengalaman],
+            ['id_karyawan' => $id, 'id_kriteria' => 11, 'nilai' => $request->absensi],
+            ['id_karyawan' => $id, 'id_kriteria' => 12, 'nilai' => $request->loyalitas],
+            ['id_karyawan' => $id, 'id_kriteria' => 13, 'nilai' => $request->wawancara],
+        ];
+
+        foreach ($criteria as $criterion) {
+            DB::table('detailkriteria')
+                ->updateOrInsert(
+                    ['id_karyawan' => $criterion['id_karyawan'], 'id_kriteria' => $criterion['id_kriteria']],
+                    ['nilai' => $criterion['nilai']]
+                );
+        }
+
+        return redirect()->route('karyawan.show', $id)
+                        ->with('status', 'Criteria updated successfully');
+    }
+
 }

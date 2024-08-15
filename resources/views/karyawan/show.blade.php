@@ -14,7 +14,12 @@
                                 <h3 class="mb-0">Detail Karyawan</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ URL::to('/') }}/karyawan" class="btn btn-sm btn-primary">Back to List</a>
+
+                                <a href="{{ route('karyawan.edit_criteria', $karyawan->id) }}" class="btn btn-primary">Edit
+                                    Kriteria</a>
+
+
+                                {{-- <a href="{{ URL::to('/') }}/karyawan" class="btn btn-sm btn-primary">Back to List</a> --}}
                             </div>
                         </div>
                     </div>

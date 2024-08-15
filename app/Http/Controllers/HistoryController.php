@@ -24,6 +24,7 @@ class HistoryController extends Controller
     {
         $rankingDetail = DB::table('ranking_detail')
             ->where('ranking_id', $id)
+            ->orderBy('ranking', 'ASC') // Change 'DESC' to 'ASC' to display from ranking 1 to n
             ->get();
 
         return view('history.detail', compact('rankingDetail'));
