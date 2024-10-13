@@ -1,4 +1,6 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 @section('content')
     @include('layouts.headers.cards')
     <div class="container-fluid mt--7">
@@ -11,7 +13,8 @@
                                 <h3 class="mb-0">Data Karyawan</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ URL::to('/') }}/karyawan/create" class="btn btn-sm btn-primary">Add karyawan</a>
+                                <a href="{{ URL::to('/') }}/karyawan/create" class="btn btn-sm btn-primary">Add
+                                    karyawan</a>
                             </div>
                         </div>
                     </div>
@@ -22,6 +25,7 @@
                         <table class="table align-items-center table-flush" id="karyawanTable">
                             <thead class="thead-light">
                                 <tr>
+                                    <th scope="col">No</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Alamat</th>
                                     <th scope="col">Email</th>
@@ -32,6 +36,7 @@
                             <tbody>
                                 @foreach ($karyawan as $key => $row)
                                     <tr>
+                                        <td>{{ $key + 1 }}</td>
                                         <td>{{ $row->name }}</td>
                                         <td>{{ $row->alamat }}</td>
                                         <td>
@@ -77,4 +82,17 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#karyawanTable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+        });
+    </script>
 @endpush

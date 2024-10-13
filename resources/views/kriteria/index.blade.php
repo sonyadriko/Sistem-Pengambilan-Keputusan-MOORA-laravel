@@ -42,7 +42,7 @@
                                         <td>{{ $row->jenis }}</td>
                                         {{-- <td>{{ $row->created_at }}</td> --}}
                                         <td>
-                                            {{-- <a class="btn btn-warning" href="kriteria/{{ $row->id }}">Edit</a> --}}
+                                            <a class="btn btn-warning" href="kriteria/{{ $row->id }}">Edit</a>
                                             <a href="{{ URL::to('/') }}/detailkriteria/detail/{{ $row->id }}"
                                                 class="btn btn-info">Detail</a>
                                             {{-- <form method="POST" action="/kriteria/{{ $row->id }}">

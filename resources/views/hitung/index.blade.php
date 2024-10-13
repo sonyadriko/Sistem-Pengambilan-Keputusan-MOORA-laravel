@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 @section('content')
     @include('layouts.headers.cards')
     <div class="container-fluid mt--7">
@@ -25,9 +26,10 @@
                         <div class="table-responsive">
                             <form id="karyawanForm" method="POST" action="{{ route('hitung.submit') }}">
                                 @csrf
-                                <table class="table align-items-center table-flush">
+                                <table class="table align-items-center table-flush" id="karyawanTable">
                                     <thead class="thead-light">
                                         <tr>
+                                            <th scope="col">No</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Alamat</th>
                                             <th scope="col">Email</th>
@@ -38,6 +40,7 @@
                                     <tbody>
                                         @foreach ($karyawan as $key => $row)
                                             <tr>
+                                                <td>{{ $key + 1 }}</td>
                                                 <td>{{ $row->name }}</td>
                                                 <td>{{ $row->alamat }}</td>
                                                 <td>
@@ -79,30 +82,63 @@
 @push('js')
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
     <script>
-        document.getElementById('karyawanForm').addEventListener('submit', function(event) {
-            let selected = [];
-            document.querySelectorAll('.karyawan-checkbox:checked').forEach(function(checkbox) {
-                selected.push(checkbox.value);
+        $(document).ready(function() {
+            var selected = [];
+
+            // Initialize DataTable
+            var table = $('#karyawanTable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
             });
 
-            if (selected.length < 2) {
-                alert('Pilih minimal dua karyawan.');
-                event.preventDefault(); // Prevent form submission
-            } else {
-                document.getElementById('selected_karyawan').value = selected.join(',');
-            }
-        });
-
-        document.getElementById('selectAll').addEventListener('click', function() {
-            let checkboxes = document.querySelectorAll('.karyawan-checkbox');
-            let allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = !allChecked;
+            // Handle checkbox change event across all pages
+            $('#karyawanTable').on('change', '.karyawan-checkbox', function() {
+                var id = $(this).val();
+                if ($(this).is(':checked')) {
+                    // Add to array if checked
+                    if (!selected.includes(id)) {
+                        selected.push(id);
+                    }
+                } else {
+                    // Remove from array if unchecked
+                    selected = selected.filter(function(value) {
+                        return value !== id;
+                    });
+                }
             });
 
-            document.getElementById('selectAll').innerText = allChecked ? 'Select All' : 'Deselect All';
+            // Handle select/deselect all
+            document.getElementById('selectAll').addEventListener('click', function() {
+                let checkboxes = table.$('.karyawan-checkbox'); // Target checkboxes across pages
+                let allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+                checkboxes.each(function() {
+                    $(this).prop('checked', !allChecked); // Toggle all checkboxes
+                    $(this).trigger('change'); // Trigger change event for each
+                });
+
+                document.getElementById('selectAll').innerText = allChecked ? 'Select All' : 'Deselect All';
+            });
+
+            // On form submit, pass selected IDs
+            document.getElementById('karyawanForm').addEventListener('submit', function(event) {
+                if (selected.length < 2) {
+                    alert('Pilih minimal dua karyawan.');
+                    event.preventDefault(); // Prevent form submission
+                } else {
+                    document.getElementById('selected_karyawan').value = selected.join(',');
+                }
+            });
         });
     </script>
 @endpush
